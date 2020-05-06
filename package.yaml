@@ -1,6 +1,7 @@
 name:                zipper-extra
 version:             0.1.0.0
 license:             MIT
+category:            Comonads
 author:              "Daniel Firth"
 maintainer:          "dan.firth@homotopic.tech"
 copyright:           "2020 Daniel Firth"
