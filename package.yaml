@@ -1,0 +1,22 @@
+name:                zipper-extra
+version:             0.1.0.0
+license:             MIT
+author:              "Daniel Firth"
+maintainer:          "dan.firth@homotopic.tech"
+copyright:           "2020 Daniel Firth"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+synopsis:            Zipper utils that weren't in Control.Comonad.Store.Zipper
+description:         Adds some utility functions for and reexports Control.Comonad.Store.Zipper
+
+dependencies:
+- base >= 4.7 && < 5
+- comonad
+- comonad-extras
+- split
+
+library:
+  source-dirs: src
