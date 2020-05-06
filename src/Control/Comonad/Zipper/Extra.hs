@@ -1,5 +1,5 @@
 module Control.Comonad.Zipper.Extra (
-  Control.Comonad.Store.Zipper.Zipper(..)
+  Control.Comonad.Store.Zipper.Zipper
 , Control.Comonad.Store.Zipper.zipper
 , Control.Comonad.Store.Zipper.zipper1
 , Control.Comonad.Store.Zipper.unzipper
