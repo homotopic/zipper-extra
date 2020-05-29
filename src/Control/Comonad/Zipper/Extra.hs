@@ -10,6 +10,7 @@ module Control.Comonad.Zipper.Extra (
 , zipperNextMaybe
 , zipperPreviousMaybe
 , zipperWithin
+, zipper'
 ) where
 
 import Control.Monad.Catch
@@ -47,6 +48,15 @@ zipperNextMaybe xs = if pos xs < size xs-1 then Just (peeks (+1) xs) else Nothin
 zipperPreviousMaybe :: Zipper t a -> Maybe a
 zipperPreviousMaybe xs = if pos xs > 0 then Just (peeks (+ (-1)) xs) else Nothing
 
--- Return a list of elements within 'r' hops either side of the zipper target.
+-- | Return a list of elements within 'r' hops either side of the zipper target.
 zipperWithin :: Int -> Zipper t a -> [a]
 zipperWithin r xs = (`peek` xs) <$>  [(max 0 (pos xs - r)) .. (min (size xs -1) (pos xs + r))]
+
+data ZipperException = EmptyZipper
+  deriving (Show, Eq, Typeable)
+
+instance Exception ZipperException where
+  displayException EmptyZipper = "Can not create an empty zipper."
+
+-- | Like `zipper` but lifted to `MonadThrow`.
+zipper' xs = maybe (throwM EmptyZipper) return $ zipper xs
