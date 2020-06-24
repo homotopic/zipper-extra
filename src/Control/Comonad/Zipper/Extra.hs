@@ -37,7 +37,7 @@ paginate' :: MonadThrow m => Int -> [a] -> m (Zipper [] [a])
 paginate' n xs = case paginate n xs of
                     Just x -> return x
                     Nothing -> if n == 0 then throwM ZeroPageSize
-                               else if length xs == 0 then throwM EmptyContentsError
+                               else if null xs then throwM EmptyContentsError
                                else throwM UnknownPaginationException
 
 -- | Return the peek of the next element if it exists.
