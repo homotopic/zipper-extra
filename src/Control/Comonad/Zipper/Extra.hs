@@ -14,7 +14,6 @@ module Control.Comonad.Zipper.Extra (
 ) where
 
 import Control.Monad.Catch
-import Control.Exception
 import Control.Comonad.Store
 import Control.Comonad.Store.Zipper
 import Data.List.Split
@@ -59,4 +58,5 @@ instance Exception ZipperException where
   displayException EmptyZipper = "Can not create an empty zipper."
 
 -- | Like `zipper` but lifted to `MonadThrow`.
+zipper' :: (MonadThrow m, Traversable t) => t a -> m (Zipper t a)
 zipper' xs = maybe (throwM EmptyZipper) return $ zipper xs
