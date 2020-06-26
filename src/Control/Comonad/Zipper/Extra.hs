@@ -74,18 +74,21 @@ data ElemNotFoundException a = ElemNotFoundException a [a]
 instance (Typeable a, Show a) => Exception (ElemNotFoundException a) where
   displayException (ElemNotFoundException x xs) = "Elem " <> show x <> " not found in " <> show xs
 
+-- | Lifted version of `Data.List.elemIndex` that throws an `ElemNotFoundException` if the target does not exist.
 elemIndexThrow :: (MonadThrow m, Eq a, Typeable a, Show a) => a -> [a] -> m Int
 elemIndexThrow x xs = case elemIndex x xs of
   Nothing -> throwM $ ElemNotFoundException x xs
   Just a -> return a
 
+-- | Seek on a property of the elements of the zipper. Finds the index of the element to search for
+--   and moves the tape to that position.
 seekOn :: Eq b => (a -> b) -> b -> Zipper [] a -> Maybe (Zipper [] a)
 seekOn f x ys = do
   k <- elemIndex x (f <$> unzipper ys)
   return $ seek k ys
 
+-- | Lifted version of `seekOn` which throws an `ElemNotFoundException` if the target does not exist.
 seekOnThrow :: (MonadThrow m, Eq b, Typeable b, Show b) => (a -> b) -> b -> Zipper [] a -> m (Zipper [] a)
 seekOnThrow f x ys = do
   k <- elemIndexThrow x (f <$> unzipper ys)
   return $ seek k ys
-
