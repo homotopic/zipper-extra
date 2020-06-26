@@ -18,7 +18,6 @@ module Control.Comonad.Zipper.Extra (
 , seekOnThrow
 ) where
 
-import Control.Applicative
 import Control.Monad.Catch
 import Control.Comonad.Store
 import Control.Comonad.Store.Zipper
