@@ -11,11 +11,18 @@ module Control.Comonad.Zipper.Extra (
 , zipperPreviousMaybe
 , zipperWithin
 , zipper'
+, ZipperException(..)
+, elemIndexThrow
+, ElemNotFoundException(..)
+, seekOn
+, seekOnThrow
 ) where
 
+import Control.Applicative
 import Control.Monad.Catch
 import Control.Comonad.Store
 import Control.Comonad.Store.Zipper
+import Data.List
 import Data.List.Split
 import Data.Typeable
 
@@ -60,3 +67,25 @@ instance Exception ZipperException where
 -- | Like `zipper` but lifted to `MonadThrow`.
 zipper' :: (MonadThrow m, Traversable t) => t a -> m (Zipper t a)
 zipper' xs = maybe (throwM EmptyZipper) return $ zipper xs
+
+data ElemNotFoundException a = ElemNotFoundException a [a]
+    deriving (Show, Eq, Typeable)
+
+instance (Typeable a, Show a) => Exception (ElemNotFoundException a) where
+  displayException (ElemNotFoundException x xs) = "Elem " <> show x <> " not found in " <> show xs
+
+elemIndexThrow :: (MonadThrow m, Eq a, Typeable a, Show a) => a -> [a] -> m Int
+elemIndexThrow x xs = case elemIndex x xs of
+  Nothing -> throwM $ ElemNotFoundException x xs
+  Just a -> return a
+
+seekOn :: Eq b => (a -> b) -> b -> Zipper [] a -> Maybe (Zipper [] a)
+seekOn f x ys = do
+  k <- elemIndex x (f <$> unzipper ys)
+  return $ seek k ys
+
+seekOnThrow :: (MonadThrow m, Eq b, Typeable b, Show b) => (a -> b) -> b -> Zipper [] a -> m (Zipper [] a)
+seekOnThrow f x ys = do
+  k <- elemIndexThrow x (f <$> unzipper ys)
+  return $ seek k ys
+
