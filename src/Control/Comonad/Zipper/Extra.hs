@@ -1,3 +1,12 @@
+{- |
+   Module     : Control.Comonad.Zipper.Extra
+   Copyright  : Copyright (C) 2020 Daniel Firth
+   Maintainer : Daniel Firth <dan.firth@homotopic.tech
+   License    : MIT
+   Stability  : experimental
+
+Extra utilities for the `Zipper` comonad.
+-}
 module Control.Comonad.Zipper.Extra (
   Control.Comonad.Store.Zipper.Zipper
 , Control.Comonad.Store.Zipper.zipper
