@@ -3,17 +3,10 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages:
-- completed:
-    hackage: comonad-extras-4.0.1@sha256:60c93aa274239086d96d162c3c8bf7cde33a3e8470ecb56461b2f77d2625521e,1321
-    pantry-tree:
-      size: 365
-      sha256: 073a63488f2d71ac41355097da8292d70c5e8d56fabb4346955ac943c8ff24b9
-  original:
-    hackage: comonad-extras-4.0.1@sha256:60c93aa274239086d96d162c3c8bf7cde33a3e8470ecb56461b2f77d2625521e,1321
+packages: []
 snapshots:
 - completed:
-    size: 531674
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/16/2.yaml
-    sha256: 4b08fb9338ca297de7ade8318f4be1216f14dff8c0426c001fb7886ee88cb84a
-  original: lts-16.2
+    size: 523649
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2020/8/27.yaml
+    sha256: 95012648db1b2180e3d7e0a3d44bc2a61b6854028382674724fee7ffa24300c3
+  original: nightly-2020-08-27
