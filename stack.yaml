@@ -1,5 +1,5 @@
-resolver: lts-16.2
+resolver: nightly-2020-08-27
 packages:
 - .
 extra-deps:
-- comonad-extras-4.0.1@sha256:60c93aa274239086d96d162c3c8bf7cde33a3e8470ecb56461b2f77d2625521e,1321
+- comonad-extras-4.0.1
