@@ -36,6 +36,8 @@ import Data.Typeable
 paginate :: Int -> [a] -> Maybe (Zipper [] [a])
 paginate n = zipper . chunksOf n
 
+-- | An exception type for when pagination fails to break up a list because either the
+--   length of the list or the page size is zero.
 data PaginationException = EmptyContentsError | ZeroPageSize | UnknownPaginationException
   deriving (Show, Eq, Typeable)
 
@@ -64,6 +66,7 @@ zipperPreviousMaybe xs = if pos xs > 0 then Just (peeks (+ (-1)) xs) else Nothin
 zipperWithin :: Int -> Zipper t a -> [a]
 zipperWithin r xs = (`peek` xs) <$>  [(max 0 (pos xs - r)) .. (min (size xs -1) (pos xs + r))]
 
+-- | Exception thrown when trying to make an empty zipper.
 data ZipperException = EmptyZipper
   deriving (Show, Eq, Typeable)
 
@@ -74,6 +77,7 @@ instance Exception ZipperException where
 zipper' :: (MonadThrow m, Traversable t) => t a -> m (Zipper t a)
 zipper' xs = maybe (throwM EmptyZipper) return $ zipper xs
 
+-- | Exception thrown when an element can not be found in a list or a zipper.
 data ElemNotFoundException a = ElemNotFoundException a [a]
     deriving (Show, Eq, Typeable)
 
