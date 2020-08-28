@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 009c6d5a242a7bfa8126e4769efd8fd30dcc90f1e1d9d134071118e6e3a6effd
+-- hash: 327c2d3767813cecfc10fa98e884ad2e3510d91c888ace687e71342603b45211
 
 name:           zipper-extra
-version:        0.1.3.1
+version:        0.1.3.2
 synopsis:       Zipper utils that weren't in Control.Comonad.Store.Zipper
 description:    Adds some utility functions for and reexports Control.Comonad.Store.Zipper
 category:       Comonads
